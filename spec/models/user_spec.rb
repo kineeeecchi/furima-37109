@@ -93,23 +93,35 @@ RSpec.describe User, type: :model do
         @user.valid?
         expect(@user.errors.full_messages).to include('Password には半角で英字と数字を含めてください')
       end
-      it '名前は、全角（漢字・ひらがな・カタカナ）でない場合登録できない' do
-        @user.last_name = 'Yamada'
+      it 'last_nameが、全角（漢字・ひらがな・カタカナ）でない場合登録できない' do
+        @user.last_name = 'Yamada 3'
+        @user.valid?
+        expect(@user.errors.full_messages).to include('Last name は全角文字を使用してください')
+      end
+      it 'first_nameが、全角（漢字・ひらがな・カタカナ）でない場合登録できない' do
         @user.first_name = 'Taro 3'
         @user.valid?
-        expect(@user.errors.full_messages).to include('Last name は全角文字を使用してください', 'First name は全角文字を使用してください')
+        expect(@user.errors.full_messages).to include('First name は全角文字を使用してください')
       end
-      it '名前カナは、全角（カタカナ）でない場合登録できない' do
-        @user.last_name_kana = 'Yamada'
+      it 'last_name_kanaが、全角（カタカナ）でない場合登録できない' do
+        @user.last_name_kana = 'Yamada 3'
+        @user.valid?
+        expect(@user.errors.full_messages).to include('Last name kana は全角カタカナを使用してください')
+      end
+      it 'last_name_kanaが、全角（カタカナ）でない場合登録できない' do
+        @user.last_name_kana = '一の瀬'
+        @user.valid?
+        expect(@user.errors.full_messages).to include('Last name kana は全角カタカナを使用してください')
+      end
+      it 'first_name_kanaが、全角（カタカナ）でない場合登録できない' do
         @user.first_name_kana = 'Taro 3'
         @user.valid?
-        expect(@user.errors.full_messages).to include('Last name kana は全角カタカナを使用してください', 'First name kana は全角カタカナを使用してください')
+        expect(@user.errors.full_messages).to include('First name kana は全角カタカナを使用してください')
       end
-      it '名前カナは、全角（カタカナ）でない場合登録できない' do
-        @user.last_name_kana = '山田'
-        @user.first_name_kana = 'たろう'
+      it 'first_name_kanaが、全角（カタカナ）でない場合登録できない' do
+        @user.first_name_kana = 'ひろ子'
         @user.valid?
-        expect(@user.errors.full_messages).to include('Last name kana は全角カタカナを使用してください', 'First name kana は全角カタカナを使用してください')
+        expect(@user.errors.full_messages).to include('First name kana は全角カタカナを使用してください')
       end
     end
   end
