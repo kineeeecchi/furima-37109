@@ -28,27 +28,27 @@ describe '商品出品登録' do
       expect(@item.errors.full_messages).to include("Item info can't be blank")
     end
     it 'category_idが未選択だと登録できない' do
-      @item.category_id = ''
+      @item.category_id = 1
       @item.valid?
       expect(@item.errors.full_messages).to include("Category can't be blank")
     end
     it 'item_condition_idが未選択だと登録できない' do
-      @item.item_condition_id = ''
+      @item.item_condition_id = 1
       @item.valid?
       expect(@item.errors.full_messages).to include("Item condition can't be blank")
     end
     it 'shipping_fee_idが未選択だと登録できない' do
-      @item.shipping_fee_id = ''
+      @item.shipping_fee_id = 1
       @item.valid?
       expect(@item.errors.full_messages).to include("Shipping fee can't be blank")
     end
     it 'shipping_prefecture_idが未選択だと登録できない' do
-      @item.shipping_prefecture_id = ''
+      @item.shipping_prefecture_id = 1
       @item.valid?
       expect(@item.errors.full_messages).to include("Shipping prefecture can't be blank")
     end
     it 'shipping_schedule_idが未選択だと登録できない' do
-      @item.shipping_schedule_id = ''
+      @item.shipping_schedule_id = 1
       @item.valid?
       expect(@item.errors.full_messages).to include("Shipping schedule can't be blank")
     end
