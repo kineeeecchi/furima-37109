@@ -1,7 +1,7 @@
 FactoryBot.define do
   factory :item do
-    item_name              { "スマホケース" }
-    item_info              { "iPhone用スマホケース" }
+    item_name              { 'スマホケース' }
+    item_info              { 'iPhone用スマホケース' }
     category_id            { 2 }
     item_condition_id      { 2 }
     shipping_fee_id        { 2 }
