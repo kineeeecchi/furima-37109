@@ -8,7 +8,5 @@ FactoryBot.define do
     address_line2          { 'AK hills' }
     phone_number           { '08012345678' }
 
-    association :user
-    association :item
   end
 end

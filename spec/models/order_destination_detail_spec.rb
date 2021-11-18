@@ -56,12 +56,17 @@ RSpec.describe OrderDestinationDetail, type: :model do
         expect(@order_destination_detail.errors.full_messages).to include('Postal code is invalid. Include hyphen(-)')
       end
       it 'phone_numberは、10桁以上11桁以内の半角数値でないと登録できない' do
-        @order_destination_detail.phone_number = '080-1111-2222'
+        @order_destination_detail.phone_number = '03-145-2222'
         @order_destination_detail.valid?
         expect(@order_destination_detail.errors.full_messages).to include("Phone number is invalid. Can't include hyphen(-)")
       end
-      it 'phone_numberは、10桁以上11桁以内の半角数値でないと登録できない' do
+      it 'phone_numberは、９桁以下の番号だと登録できない' do
         @order_destination_detail.phone_number = '1236789'
+        @order_destination_detail.valid?
+        expect(@order_destination_detail.errors.full_messages).to include("Phone number is invalid. Can't include hyphen(-)")
+      end
+      it 'phone_numberは、12桁以上の番号だと登録できない' do
+        @order_destination_detail.phone_number = '123456789012'
         @order_destination_detail.valid?
         expect(@order_destination_detail.errors.full_messages).to include("Phone number is invalid. Can't include hyphen(-)")
       end
@@ -69,6 +74,11 @@ RSpec.describe OrderDestinationDetail, type: :model do
         @order_destination_detail.user_id = nil
         @order_destination_detail.valid?
         expect(@order_destination_detail.errors.full_messages).to include("User can't be blank")
+      end
+      it 'itemが紐付いていないと購入できない' do
+        @order_destination_detail.item_id = nil
+        @order_destination_detail.valid?
+        expect(@order_destination_detail.errors.full_messages).to include("Item can't be blank")
       end
     end
   end
