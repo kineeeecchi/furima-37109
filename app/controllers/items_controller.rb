@@ -35,8 +35,8 @@ class ItemsController < ApplicationController
   end
 
   def destroy
-      @item.destroy
-      redirect_to root_path
+    @item.destroy
+    redirect_to root_path
   end
 
   private
@@ -48,7 +48,7 @@ class ItemsController < ApplicationController
 
   def move_to_root_path
     @item = Item.find(params[:id])
-    redirect_to root_path unless current_user.id == @item.user_id
+    redirect_to root_path if current_user.id != @item.user_id || (current_user.id == @item.user_id && @item.order.present?)
   end
 
   def set_item
